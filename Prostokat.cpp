@@ -36,7 +36,7 @@ std::string Prostokat::rysuj() {
     ret += "fill:" + Obiekt::figura.getKolWyp();
     ret += ";stroke:" + Obiekt::figura.getKolLin();
     ret += ";stroke-width:" + std::to_string(Obiekt::figura.getGruLin());
-    ret += "\"z-index: \"" + std::to_string(wsp[2]);
+    ret += ";z-index:" + std::to_string(wsp[2]);
     ret += "\" transform=\"rotate(" + std::to_string(Obiekt::figura.getRot());
     ret += " , " + std::to_string(a/2) + " , " + std::to_string(b/2);
     ret += ")\" />";
