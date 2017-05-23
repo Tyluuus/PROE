@@ -21,7 +21,7 @@ std::string Tablica::rysuj() {
     plik.open("test.svg",std::ios::out);
     plik<<ret<<std::endl;
     plik.close();
-    return ret;
+    return "test.svg";
 }
 
 void Tablica::dodaj(Obiekt<Figura> *obiekt)
