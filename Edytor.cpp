@@ -97,13 +97,14 @@ void Edytor::dodawanie()
         cout << "Podaj id tablicy do ktorej chcesz zapisywac figury: ";
         cin >> id;
     }
-    try
-    {
-        sprawdz_tablice(id);
+    Tablica *tablica;
+    try {
+        tablica = &tablice.at(id);
     }
-    catch(Wyjatek wyjatek)
+    catch(std::out_of_range)
     {
-        cout<<wyjatek.getMsg()<<endl;
+        cout<<"Brak tablicy o takim id."<<endl;
+        return;
     }
     cout<<"Jaka figure chcesz dodac?"<<endl;
     cout<<"1. Prostokat"<<endl;
