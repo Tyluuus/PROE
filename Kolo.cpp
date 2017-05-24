@@ -48,4 +48,11 @@ Kolo::Kolo(int r) : r(r)
 }
 Kolo::~Kolo(){licz--;}
 
+std::string Kolo::wymiary() {
+
+    std::string wymiary;
+    wymiary += " r = " + std::to_string(r);
+    return wymiary;
+}
+
 

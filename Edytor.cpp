@@ -164,6 +164,8 @@ void Edytor::modyfikuj()
     wsp.push_back(0);
     wsp.push_back(0);
     wsp.push_back(0);
+    cout<<"Aktualnie istniejace figury: "<<endl;
+    wyswietlanie();
     cout<<endl<<"Podaj id figury ktora chcesz zmodyfikowac: ";
     cin>>id;
 
@@ -360,6 +362,27 @@ int Edytor::znajdz_tablice(int id)
     }
 }
 
+
+
+void Edytor::wyswietlanie()
+{
+    for (auto tablica : tablice)
+    {
+        for (auto obiekt : tablica.getObiekty())
+        {
+            cout <<"Nazwa obiektu: "<< obiekt->getFig() << " jego ID: "<< obiekt->getFigura().getId() << std::endl;
+            cout<<"ma kolor wypelnienia: "<<obiekt->getFigura().getKolWyp()<<endl;
+            if(obiekt->getFig()=="Prostokat")
+            {
+                cout<<"Wymiary tej figury to: "<<obiekt->wymiary()<<endl;
+            }
+            if(obiekt->getFig()=="Kolo")
+            {
+                cout<<"Wymiary tej figury to: "<<obiekt->wymiary()<<endl;
+            }
+        }
+    }
+}
 
 
 

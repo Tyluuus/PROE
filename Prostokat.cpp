@@ -52,5 +52,12 @@ Prostokat::Prostokat(int a, int b) : a(a), b(b)
 }
 Prostokat::~Prostokat(){Prostokat::licz--; }
 
+std::string Prostokat::wymiary()
+{
+    std::string wymiary;
+    wymiary += std::to_string(a) + " x " + std::to_string(b);
+    return wymiary;
+}
+
 
 

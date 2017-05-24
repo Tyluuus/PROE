@@ -22,7 +22,7 @@ class Prostokat
             virtual void modyfikuj(std::vector<int> wektor);
             virtual void modyfikuj(int kat);
             virtual void modyfikuj(double skala);
-
+            virtual std::string wymiary();
 };
 
 

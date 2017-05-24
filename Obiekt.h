@@ -28,6 +28,7 @@ class Obiekt
     argSzabl getFigura() const {
             return figura;
         }
+    virtual std::string wymiary()=0;
 
 
 };

@@ -25,6 +25,8 @@ public:
     int przeszukaj_tablice(int id);
     int znajdz_tablice(int id);
 
+    void wyswietlanie();
+
 };
 
 

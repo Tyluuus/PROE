@@ -26,6 +26,7 @@ public:
     int getId() const;
     void sprawdz_figury(int id);
     int sprawdz_ilosc(std::string co_liczyc);
+    const std::list<Obiekt<Figura> *> &getObiekty() const;
 
 };
 

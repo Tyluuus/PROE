@@ -126,6 +126,10 @@ int Tablica::sprawdz_ilosc(std::string co_liczyc)
     }
 }
 
+const std::list<Obiekt<Figura> *> &Tablica::getObiekty() const {
+    return obiekty;
+}
+
 
 
 
