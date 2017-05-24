@@ -6,8 +6,8 @@ using namespace std;
 
 void Edytor::konsola()
 {
-    int kontrola=1;
-    while(kontrola!=0)
+    char kontrola='1';
+    while(kontrola!='0')
     {
         cout<<"Wybierz co chcesz zrobic. (wcisnij podany w nawiasie przycisk i zatwierdz)"<<endl;
         cout<<"Dodaj figure (1)"<<endl;
@@ -19,7 +19,7 @@ void Edytor::konsola()
         cout<<"Zamknij program (0)"<<endl;
         cout<<"Wcisnij odpowiedni przycisk: ";
         cin>>kontrola;
-        if(kontrola==1)
+        if(kontrola=='1')
         {
             try {
                 dodawanie();
@@ -29,7 +29,7 @@ void Edytor::konsola()
                 cout<<wyjatek.getMsg()<<endl;
             }
         }
-        if(kontrola==2)
+        if(kontrola=='2')
         {
             try{
             modyfikuj();
@@ -39,7 +39,7 @@ void Edytor::konsola()
                 cout<<wyjatek.getMsg()<<endl;
             }
         }
-        if(kontrola==3)
+        if(kontrola=='3')
         {
             try{
             usun();
@@ -49,7 +49,7 @@ void Edytor::konsola()
                 cout<<wyjatek.getMsg()<<endl;
             }
         }
-        if(kontrola==4)
+        if(kontrola=='4')
         {
             try{
             zapisywanie();
@@ -59,11 +59,11 @@ void Edytor::konsola()
                 cout<<wyjatek.getMsg()<<endl;
             }
         }
-        if(kontrola==5)
+        if(kontrola=='5')
         {
             dodaj_tablice();
         }
-        if(kontrola==6)
+        if(kontrola=='6')
         {
             try {
                 usun_tablice();
@@ -73,11 +73,14 @@ void Edytor::konsola()
                 cout<<wyjatek.getMsg()<<endl;
             }
         }
-        if(kontrola==0)
+        if(kontrola=='0')
         {
             exit;
         }
-
+        if(kontrola!='1' && kontrola!='2' && kontrola!='3' && kontrola!='4' && kontrola!='5' && kontrola!='6' && kontrola!='0' )
+        {
+            cout<<"Podaj jeszcze raz prawidlowa wartosc! "<<endl;
+        }
     }
 }
 
@@ -87,7 +90,8 @@ void Edytor::dodawanie()
     {
         throw Wyjatek("Aby zrobic cokolwiek musisz najpierw dodac pierwsza tablice!");
     }
-    int wybor=0, id=0;
+    int id=0;
+    char wybor;
     cout<<"Dodajesz figure."<<endl;
     if(tablice.size()>1) {
         cout << "Podaj id tablicy do ktorej chcesz zapisywac figury: ";
@@ -106,7 +110,11 @@ void Edytor::dodawanie()
     cout<<"2. Kolo"<<endl;
     cout<<"Podaj odpowiedni identyfikator: ";
     cin>>wybor;
-    if(wybor==1)
+    if(wybor!= '1' && wybor != '2')
+    {
+        cout<<endl<<"Podaj prawidlowy identyfikator! "<<endl;
+    }
+    if(wybor=='1')
     {
         int a,b;
         cout<<"Podaj dlugosci bokow a i b: ";
@@ -123,7 +131,7 @@ void Edytor::dodawanie()
         }
 
     }
-    if(wybor==2)
+    if(wybor=='2')
     {
         int r;
         cout<<"Podaj promien kola: ";
@@ -149,20 +157,39 @@ void Edytor::modyfikuj()
     int id=0,idT=0, rot=0;
     char znak='k';
     double skala=1;
+    double gruLin=1;
+    string kolLin="black";
+    string kolWyp="none";
     vector<int> wsp;
     wsp.push_back(0);
     wsp.push_back(0);
     wsp.push_back(0);
     cout<<endl<<"Podaj id figury ktora chcesz zmodyfikowac: ";
     cin>>id;
-    idT=find_tablica(id);
-    while(znak!='d')
+
+    idT=przeszukaj_tablice(id);
+    cout<<"IdT = "<<idT<<endl;
+    try
+    {
+        tablice[idT].sprawdz_figury(id);
+    }
+    catch(Wyjatek wyjatek)
+    {
+        cout<<wyjatek.getMsg()<<endl;
+        znak='g';
+    }
+    while(znak!='g')
     {
     cout<<endl<<"Co chcesz zrobic?"<<endl<<"a. Rotacja o wybrany kat "<<endl<<"b. Przeskalowanie "<<endl<<"c. Przesuniecie o wektor"<<endl;
-    cout<<"d. Zapisanie zmian"<<endl;
+    cout<<"d. Zmiana koloru figury "<<endl<<"e. Zmiana koloru lini "<<endl<<"f. Zmiana grubosci lini "<<endl<<"g. Zapisanie zmian"<<endl;
 
 
         cin>>znak;
+
+        if(znak != 'a' && znak != 'b' && znak != 'c' && znak != 'd' && znak != 'e' && znak != 'f' && znak != 'g')
+        {
+         cout<<"Podaj prawidlowa wartosc! "<<endl;
+        }
         if (znak == 'a')
         {
             cout << endl << "Podaj kat (liczba calkowita): ";
@@ -188,8 +215,36 @@ void Edytor::modyfikuj()
             wsp.push_back(x);
 
         }
+        if (znak == 'd')
+        {
+            cout<<endl<<"Wpisz nazwe koloru wypelnienia figury (black, red, blue, yellow, none): ";
+            cin>>kolWyp;
+            while(kolWyp!="black" && kolWyp!="red" && kolWyp!="blue" && kolWyp!="yellow" && kolWyp!="none")
+            {
+                cout<<"Podaj wlasciwy jeden z dopuszczalnych kolorow wywpelnienia! : ";
+                cin>>kolWyp;
+                cout<<endl;
+            }
+        }
+        if (znak == 'e')
+        {
+            cout<<endl<<"Wpisz nazwe koloru konturow figury (black, red, blue, yellow): ";
+            cin>>kolLin;
+            while(kolWyp!="black" && kolWyp!="red" && kolWyp!="blue" && kolWyp!="yellow")
+            {
+                cout<<"Podaj wlasciwy jeden z dopuszczalnych kolorow lini";
+                cin>>kolLin;
+                cout<<endl;
+            }
+        }
+        if(znak == 'f')
+        {
+            cout<<endl<<"Podaj grubosc lini figury: ";
+            cin>>gruLin;
+        }
     }
-    tablice[idT].modyfikuj(id,skala,rot,wsp);
+    tablice[idT].modyfikuj(id,skala,rot,wsp, gruLin, kolLin, kolWyp);
+
 
 }
 void Edytor::usun()
@@ -201,10 +256,11 @@ void Edytor::usun()
     int id,idT;
     cout<<"Podaj id figury ktora chcesz usunac: ";
     cin>>id;
-    idT=find_tablica(id);
+    idT=przeszukaj_tablice(id);
     try
     {
         tablice[idT].usun(id);
+        cout<<"Usunieto figure o id= "<<id<<endl;
     }
     catch(Wyjatek wyjatek)
     {
@@ -280,9 +336,9 @@ void Edytor::sprawdz_tablice(int id)
 
 }
 
-int Edytor::find_tablica(int id)
+int Edytor::przeszukaj_tablice(int id)
 {
-    for(int i=0;i<tablice.size();i++)
+    for(int i=0;i<=tablice.size();i++)
     {
         try
         {
@@ -292,6 +348,20 @@ int Edytor::find_tablica(int id)
         return i;
     }
 }
+
+int Edytor::znajdz_tablice(int id)
+{
+    for(int i=0;i<tablice.size();i++)
+    {
+        if(tablice[i].getId()==id)
+        {
+            return i;
+        }
+    }
+}
+
+
+
 
 
 

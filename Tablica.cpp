@@ -62,7 +62,7 @@ void Tablica::usun(int id)
         }
 }
 
-void Tablica::modyfikuj(int id, double skala, int rot, std::vector<int> wsp)
+void Tablica::modyfikuj(int id, double skala, int rot, std::vector<int> wsp, double gruLin, std::string kolLin, std::string kolWyp)
 {
 
         for(auto i = obiekty.begin(); i!= obiekty.end(); i++)
@@ -72,6 +72,9 @@ void Tablica::modyfikuj(int id, double skala, int rot, std::vector<int> wsp)
                 (*i)->modyfikuj(skala);
                 (*i)->modyfikuj(rot);
                 (*i)->modyfikuj(wsp);
+                (*i)->getFigura().setGruLin(gruLin);
+                (*i)->getFigura().setKolLin(kolLin);
+                (*i)->getFigura().setKolWyp(kolWyp);
             }
         }
 }

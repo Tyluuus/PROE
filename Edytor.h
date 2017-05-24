@@ -22,7 +22,8 @@ public:
     void dodaj_tablice();
     void usun_tablice();
     void sprawdz_tablice(int id);
-    int find_tablica(int id);
+    int przeszukaj_tablice(int id);
+    int znajdz_tablice(int id);
 
 };
 
